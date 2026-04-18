@@ -4,7 +4,7 @@ A Retrieval-Augmented Generation system with a self-correction layer. When retri
 
 > Built around ancient Egypt as a domain, but the architecture is general-purpose.
 
-🟢 **[Live Demo →](https://huggingface.co/spaces/Saraay/Rosetta)**
+🟢 **[Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/Saraay/Rosetta)**
 
 ---
 
@@ -38,23 +38,22 @@ Vector Store (Chroma)  ──→  Evaluate relevance (LLM)
 
 ## Project Structure
 
-\`\`\`
+```bash
 corrective-rag/
 ├── docker/
 │   ├── Dockerfile
 │   ├── docker-compose.yml
 │   └── .env.example.app
 ├── src/
-│   ├── config.py          # API keys, paths, model names
-│   ├── ingest.py          # Load Wikipedia PDFs → ChromaDB
-│   ├── vector_store.py    # Cohere embeddings + Chroma retrieval
-│   ├── llm.py             # Evaluate, refine, search, generate
-│   ├── pipeline.py        # Corrective RAG orchestration
-│   ├── prompts.py         # Prompt templates
-│   ├── main.py            # FastAPI endpoint (/rag)
-├── chroma_db/             # Persisted vector store (git-ignored)
+│   ├── config.py
+│   ├── ingest.py
+│   ├── vector_store.py
+│   ├── llm.py
+│   ├── pipeline.py
+│   ├── prompts.py
+│   └── main.py
+├── chroma_db/
 └── requirements.txt
-\`\`\`
 
 ---
 
