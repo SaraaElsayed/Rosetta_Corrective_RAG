@@ -10,7 +10,7 @@ A Retrieval-Augmented Generation system with a self-correction layer. When retri
 
 ## How It Works
 
-\`\`\`
+```bash
 Question
    │
    ▼
@@ -27,12 +27,12 @@ Vector Store (Chroma)  ──→  Evaluate relevance (LLM)
                     └────────────┬────────────┘
                                  │
                            Generate Answer
-\`\`\`
+```
 
-1. **Retrieve** — pull top-k chunks from ChromaDB using Cohere embeddings
-2. **Evaluate** — LLM labels each chunk as Correct / Ambiguous / Incorrect
-3. **Refine or Search** — correct chunks are filtered to the most relevant sentences; if none pass, the question is rewritten and Tavily fills the gap
-4. **Generate** — Groq (LLaMA) produces the final answer from the assembled context
+1. **Retrieve** — pull top-k chunks from ChromaDB using Cohere embeddings  
+2. **Evaluate** — LLM labels each chunk as Correct / Ambiguous / Incorrect  
+3. **Refine or Search** — correct chunks are filtered to the most relevant sentences; if none pass, the question is rewritten and Tavily fills the gap  
+4. **Generate** — Groq (LLaMA) produces the final answer from the assembled context  
 
 ---
 
@@ -54,13 +54,14 @@ corrective-rag/
 │   └── main.py
 ├── chroma_db/
 └── requirements.txt
+```
 
 ---
 
 ## Stack
 
 | Layer | Tool |
-|---|---|
+|------|------|
 | Embeddings | Cohere `embed-english-v3.0` |
 | Vector Store | ChromaDB (local persistence) |
 | LLM | Groq — LLaMA 3 |
@@ -92,6 +93,8 @@ COHERE_EMBED_MODEL=embed-english-v3.0
 GROQ_MODEL=llama3-8b-8192
 ```
 
+---
+
 ### 2. Ingest documents
 
 ```bash
@@ -101,6 +104,8 @@ python ingest.py
 ```
 
 This fetches Wikipedia articles, chunks them semantically, and stores embeddings in `chroma_db/`.
+
+---
 
 ### 3a. Run with Docker
 
@@ -116,6 +121,8 @@ curl -X POST http://localhost:8000/rag \
   -H "Content-Type: application/json" \
   -d '{"question": "Who was Ramesses II?"}'
 ```
+
+---
 
 ### 3b. Run locally (no Docker)
 
@@ -152,4 +159,5 @@ uvicorn main:app --reload
 
 ## Notes
 
-- **Chunking strategy** — documents are split using LangChain's `SemanticChunker`, which groups sentences by meaning rather than fixed size. Any chunk that still exceeds 3000 characters after semantic splitting is further broken down with a sliding window (1000-char chunks, 100-char overlap) to keep retrieval precise without losing context at boundaries.
+- **Chunking strategy** — documents are split using LangChain's `SemanticChunker`, which groups sentences by meaning rather than fixed size.  
+- Any chunk that exceeds 3000 characters is further split using a sliding window (1000-char chunks, 100-char overlap) to preserve context while improving retrieval precision.
