@@ -1,0 +1,5 @@
+GROQ_API_KEY=""
+GROQ_MODEL="llama-3.1-8b-instant"
+TAVILY_API_KEY=""
+COHERE_API_KEY=""
+COHERE_EMBED_MODEL="embed-multilingual-light-v3.0"

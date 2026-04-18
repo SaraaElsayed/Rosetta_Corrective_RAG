@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+groq
+cohere
+chromadb
+langchain-community
+langchain-experimental
+langchain-core
+pymupdf
+spacy
+tavily-python
+scipy
+wikipedia
