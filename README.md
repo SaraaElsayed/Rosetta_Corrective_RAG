@@ -4,7 +4,7 @@ A Retrieval-Augmented Generation system with a self-correction layer. When retri
 
 > Built around ancient Egypt as a domain, but the architecture is general-purpose.
 
-🟢 **[Live Demo →](YOUR_HF_SPACES_URL_HERE)**
+🟢 **[Live Demo →](https://huggingface.co/spaces/Saraay/Rosetta)**
 
 ---
 
